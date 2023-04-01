@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ news_item.title }}
+{% endblock%}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            Категория: {{ news_item.category }}
+        </div>
+        <div class="card-body">
+            {{news.count}}
+            <div class="media">
+                <div class="media-body">
+                    {% if news_item.photo %}
+                    <img src="{{ news_item.photo.url}}" alt="фото" width="350" class="mr-3">
+                    {% else %}
+                    <img src="https://vet-centre.by/wp-content/uploads/2016/11/kot-eti-udivitelnye-kotiki.jpg"
+                         alt="тут должен быть котик" width="50" class="mr-3">
+                    {% endif %}
+                </div>
+
+                <h5 class="card-title">{{ news_item.title }}</h5>
+                {% autoescape off %}
+                <p class="card-text">{{ news_item.content|linebreaks }}</p>
+                {% endautoescape %}
+            </div>
+            <div class="card-footer text-muted">
+                {{ news_item.created_at|date:"Y-m-d H:i:s" }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
